@@ -28,11 +28,16 @@ public class AuthorizationFilter extends GenericFilterBean {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse res = (HttpServletResponse) servletResponse;
 
+        String usernameRequestFor = "";
+        try {
+            usernameRequestFor = req.getRequestURI().split("/")[2];
+        } catch (Exception e) {}
+
         String token = req.getHeader(HttpHeaders.AUTHORIZATION);
         String username = validateToken(token);
 
-        if (username == null) {
-            logger.info("User is not authenticated with token: " + token);
+        if (!usernameRequestFor.equals(username)) {
+            logger.info("User is not authenticated with token: " + token + ", usernameRequestFor:" + usernameRequestFor);
 
             res.setStatus(HttpStatus.UNAUTHORIZED.value());
             res.getWriter().write("User is not authenticated");

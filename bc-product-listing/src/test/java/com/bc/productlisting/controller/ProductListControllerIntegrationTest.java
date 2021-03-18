@@ -100,7 +100,7 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto1))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
@@ -108,7 +108,7 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto2))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
@@ -116,13 +116,13 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto3))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
         MvcResult result = mockMvc.perform(
                 get("/merchant/merchant-1/products?page=0&size=2")
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk())
                 .andReturn();
@@ -156,7 +156,7 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto1))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
@@ -164,7 +164,7 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto2))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
@@ -172,13 +172,13 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto3))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
         MvcResult result = mockMvc.perform(
                 get("/merchant/merchant-1/products?page=0&size=3&sort=unitPrice,asc")
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk())
                 .andReturn();
@@ -212,7 +212,7 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto1))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
@@ -220,7 +220,7 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto2))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
@@ -228,13 +228,13 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto3))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
         MvcResult result = mockMvc.perform(
                 get("/merchant/merchant-1/products?page=0&size=3&sort=inventory,desc")
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk())
                 .andReturn();
@@ -264,7 +264,7 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto1))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
@@ -272,13 +272,13 @@ public class ProductListControllerIntegrationTest {
                 post("/merchant/merchant-1/products")
                         .content(mapper.writeValueAsString(productDto2))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk());
 
         MvcResult result = mockMvc.perform(
                 get("/merchant/merchant-1/products?page=0&size=3")
-                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("1", secret))
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isOk())
                 .andReturn();
@@ -294,6 +294,15 @@ public class ProductListControllerIntegrationTest {
     public void should_return_error_when_user_is_not_authenticated() throws Exception {
         mockMvc.perform(
                 get("/merchant/merchant-1/products?page=0&size=2")
+        )
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    public void should_return_error_when_request_is_for_another_user() throws Exception {
+        mockMvc.perform(
+                get("/merchant/merchant-2/products?page=0&size=2")
+                        .header(HttpHeaders.AUTHORIZATION, TestUtil.createToken("merchant-1", secret))
         )
                 .andExpect(status().isUnauthorized());
     }
