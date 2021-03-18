@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  bc-authentication:
+    image: bc-authentication
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dbpostgresql-bc-auth
+  dbpostgresql-bc-auth:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=bc_auth
+  dbpostgresql-bc-product-list:
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=bc_product_list

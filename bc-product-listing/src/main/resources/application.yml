@@ -1,0 +1,16 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://dbpostgresql-bc-product-list:5432/bc_product_list
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+bc:
+  authentication:
+    jwt:
+      secret: bc_secret_key_test_1234567890123
+  product-listing:
+    minInventoryToList: 5

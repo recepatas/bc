@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://dbpostgresql-bc-auth:5432/bc_auth
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+bc:
+  authentication:
+    minPasswordLength: 6
+    jwt:
+      expireDuration:
+        default: 12h
+        rememberMe: 7d
+      secret: bc_secret_key_test_1234567890123
